@@ -99,4 +99,4 @@ main(void)
 ## Notes
 
 - This implementation uses the Ristretto255 group and SHA-512 as the hash function, so that it can trivially be ported to [wasm-crypto](https://github.com/jedisct1/wasm-crypto).
-- Client identifiers have a maximum size of 255 bytes.
+- Client and server identifiers have a maximum size of 255 bytes.
