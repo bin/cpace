@@ -7,7 +7,6 @@ MESSAGE(STATUS "Building CPace library...")
 INCLUDE_DIRECTORIES(${SODIUM_INCLUDE_PATH})
 
 ADD_LIBRARY(cpace STATIC
-	src/crypto_cpace.c
 	src/cpace.c)
 
 TARGET_LINK_LIBRARIES(cpace ${SODIUM_STATIC_LIB_PATH})

@@ -1,11 +1,12 @@
 #include <sodium.h>
 #include <string.h>
 
-#include "cpace.h"
+#include "crypto_cpace.h"
 
 #define DSI1 "CPaceRistretto255-1"
 #define DSI2 "CPaceRistretto255-2"
 #define session_id_BYTES 16
+#define hash_BLOCKSIZE 128
 
 #define COMPILER_ASSERT(X) (void) sizeof(char[(X) ? 1 : -1])
 
@@ -17,7 +18,7 @@ ctx_init(crypto_cpace_state *const ctx, const char *password,
 {
     crypto_hash_sha512_state st;
     unsigned char            h[crypto_core_ristretto255_HASHBYTES];
-    static unsigned char     zpad[16];
+    static unsigned char     zpad[hash_BLOCKSIZE];
     const size_t             dsi_len = sizeof DSI1 - 1U;
     size_t                   pad_len;
 
@@ -57,6 +58,7 @@ ctx_final(const crypto_cpace_state *ctx, crypto_cpace_shared_keys *shared_keys,
     unsigned char            p[crypto_scalarmult_ristretto255_BYTES];
     unsigned char            h[crypto_hash_sha512_BYTES];
 
+    /* crypto_scalarmult_*() rejects the identity element */
     if (crypto_scalarmult_ristretto255(p, ctx->r, op) != 0) {
         return -1;
     }
