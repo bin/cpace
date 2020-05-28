@@ -1,7 +1,7 @@
 #include <sodium.h>
 #include <string.h>
 
-#include "crypto_cpace.h"
+#include "cpace.h"
 
 #define DSI1 "CPaceRistretto255-1"
 #define DSI2 "CPaceRistretto255-2"
